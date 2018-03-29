@@ -6,10 +6,16 @@
     android:layout_height="match_parent"
     tools:context="com.schedule.sweet.sweetschedule.MainActivity">
 
+    <TextView
+        android:id="@+id/head"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@color/colorPrimaryDark"/>
     <FrameLayout
         android:id="@+id/fl_container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_below="@+id/head">
 
     </FrameLayout>
 
@@ -25,10 +31,13 @@
         <!--android:layout_height="wrap_content"-->
         <!--&gt;</android.support.v4.view.ViewPager>-->
 
-    <!--<com.ashokvarma.bottomnavigation.BottomNavigationBar-->
-        <!--android:id="@+id/bottom_navigation_bar"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--/>-->
+    <com.ashokvarma.bottomnavigation.BottomNavigationBar
+        android:id="@+id/bottom_navigation_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+
+        android:background="@color/colorPrimary"
+        />
 
 </RelativeLayout>
