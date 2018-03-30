@@ -10,6 +10,7 @@ import android.util.Log;
 import com.schedule.sweet.sweetschedule.fragment.Contacts;
 import com.schedule.sweet.sweetschedule.fragment.Other;
 import com.schedule.sweet.sweetschedule.fragment.Schedule;
+import com.schedule.sweet.sweetschedule.fragment.Schedule_Day;
 import com.schedule.sweet.sweetschedule.fragment.TestFragment;
 import com.ashokvarma.bottomnavigation.*;
 
@@ -18,6 +19,7 @@ public class MainActivity extends AppCompatActivity implements Schedule.OnFragme
 
     BottomNavigationBar mBottomNavigationBar;
     Schedule schedule;
+    Schedule_Day schedule_day;
     Contacts contacts;
     Other other;
     int index = 0;
@@ -31,9 +33,12 @@ public class MainActivity extends AppCompatActivity implements Schedule.OnFragme
         schedule = Schedule.newInstance("123", "456");
         contacts = Contacts.newInstance("123", "456");
         other = Other.newInstance("123", "456");
+        //实例化子fragment
+        schedule_day = Schedule_Day.newInstance("123", "456");
         //设置默认的fragment
-        getFragmentManager().beginTransaction().add(R.id.fl_container, schedule).commitAllowingStateLoss();
-
+        getFragmentManager().beginTransaction().add(R.id.fl_container, schedule, "schedule").commitAllowingStateLoss();
+        //在Schedule中添加子fragment
+        getFragmentManager().beginTransaction().add(R.id.fl_container_schedule, schedule_day, "schedule_Day").commitAllowingStateLoss();
         //初始化并设置BottomNavigationBar
         mBottomNavigationBar = findViewById(R.id.bottom_navigation_bar);
         mBottomNavigationBar.setMode(BottomNavigationBar.MODE_FIXED)

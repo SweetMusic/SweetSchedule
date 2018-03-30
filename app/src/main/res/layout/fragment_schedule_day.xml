@@ -1,0 +1,27 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorLightBlue"
+    android:id="@+id/linearLayout">
+
+
+
+    <TextView
+        android:layout_marginTop="100dp"
+        android:id="@+id/f_schedule_tv1"
+        android:layout_width="100dp"
+        android:layout_height="200dp"
+        android:text="@string/hello_fragment"
+        android:background="@drawable/textview_border"
+        android:gravity="center"
+        android:layout_marginRight="10dp"/>
+    <TextView
+        android:layout_marginTop="50dp"
+        android:id="@+id/f_schedule_tv2"
+        android:layout_width="100dp"
+        android:layout_height="200dp"
+        android:text="@string/hello_fragment"
+        android:background="@drawable/textview_border"
+        android:gravity="center"/>
+
+</LinearLayout>

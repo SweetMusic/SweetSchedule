@@ -1,9 +1,14 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorOrange">
 
 
+    <TextView
+        android:id="@+id/head"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@color/colorPrimaryDark"/>
     <TextView
         android:id="@+id/f_schedule_tv1"
         android:layout_width="match_parent"
@@ -11,4 +16,4 @@
         android:text="@string/hello_fragment"
         android:gravity="center"/>
 
-</LinearLayout>
+</RelativeLayout>
