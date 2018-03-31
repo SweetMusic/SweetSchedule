@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.app.Fragment;
 import android.support.annotation.Nullable;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,6 +37,7 @@ public class Schedule extends Fragment {
 
     private  Button btn1;
     private LinearLayout ll;
+    Schedule_Day schedule_day;
 
     private OnFragmentInteractionListener mListener;
 
@@ -68,6 +70,11 @@ public class Schedule extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        //实例化子fragment
+        schedule_day = Schedule_Day.newInstance("123", "456");
+        //在Schedule中添加子fragment
+        getFragmentManager().beginTransaction().add(R.id.fl_container_schedule, schedule_day, "schedule_Day").commitAllowingStateLoss();
+
     }
 
     @Override
@@ -87,12 +94,17 @@ public class Schedule extends Fragment {
             @Override
             public void onClick(View view) {
                 Schedule_Day m = (Schedule_Day) getActivity().getFragmentManager().findFragmentByTag("schedule_Day");
-                TextView tv = new TextView(getActivity());
+                TextView tv;
                 tv = new TextView(getActivity());
                 tv.setText(R.string.app_name);
                 tv.setBackgroundResource(R.drawable.textview_border);
+                LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT , LinearLayout.LayoutParams.WRAP_CONTENT );
+                lp.setMargins(0,(int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 100, getResources().getDisplayMetrics()),(int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 10, getResources().getDisplayMetrics()),0);
+                tv.setLayoutParams(lp);
                 tv.setWidth(100);
+                tv.setWidth((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 100, getResources().getDisplayMetrics()));
                 tv.setHeight(200);
+                tv.setHeight((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 200, getResources().getDisplayMetrics()));
                 m.addView(tv);
                 Log.d("click", "---- click ----");
             }

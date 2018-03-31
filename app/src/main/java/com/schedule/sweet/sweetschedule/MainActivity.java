@@ -15,11 +15,10 @@ import com.schedule.sweet.sweetschedule.fragment.TestFragment;
 import com.ashokvarma.bottomnavigation.*;
 
 
-public class MainActivity extends AppCompatActivity implements Schedule.OnFragmentInteractionListener{
+public class MainActivity extends AppCompatActivity implements Schedule.OnFragmentInteractionListener,Contacts.OnFragmentInteractionListener,Other.OnFragmentInteractionListener,Schedule_Day.OnFragmentInteractionListener{
 
     BottomNavigationBar mBottomNavigationBar;
     Schedule schedule;
-    Schedule_Day schedule_day;
     Contacts contacts;
     Other other;
     int index = 0;
@@ -33,12 +32,10 @@ public class MainActivity extends AppCompatActivity implements Schedule.OnFragme
         schedule = Schedule.newInstance("123", "456");
         contacts = Contacts.newInstance("123", "456");
         other = Other.newInstance("123", "456");
-        //实例化子fragment
-        schedule_day = Schedule_Day.newInstance("123", "456");
-        //设置默认的fragment
+        //添加并设置默认的fragment
         getFragmentManager().beginTransaction().add(R.id.fl_container, schedule, "schedule").commitAllowingStateLoss();
-        //在Schedule中添加子fragment
-        getFragmentManager().beginTransaction().add(R.id.fl_container_schedule, schedule_day, "schedule_Day").commitAllowingStateLoss();
+        getFragmentManager().beginTransaction().add(R.id.fl_container, contacts, "contacts").hide(contacts).commitAllowingStateLoss();
+        getFragmentManager().beginTransaction().add(R.id.fl_container, other, "other").hide(other).commitAllowingStateLoss();
         //初始化并设置BottomNavigationBar
         mBottomNavigationBar = findViewById(R.id.bottom_navigation_bar);
         mBottomNavigationBar.setMode(BottomNavigationBar.MODE_FIXED)
@@ -57,22 +54,19 @@ public class MainActivity extends AppCompatActivity implements Schedule.OnFragme
                 switch (position)
                 {
                     case 0 :
-                        if(index != position){
-                            getFragmentManager().beginTransaction().replace(R.id.fl_container, schedule)
-                                    .commitAllowingStateLoss();
-                        }
+                        getFragmentManager().beginTransaction()
+                                .hide(contacts).hide(other).show(schedule)
+                                .commitAllowingStateLoss();
                         break;
                     case 1 :
-                        if(index != position){
-                            getFragmentManager().beginTransaction().replace(R.id.fl_container, contacts)
-                                    .commitAllowingStateLoss();
-                        }
+                        getFragmentManager().beginTransaction()
+                                .hide(other).hide(schedule).show(contacts)
+                                .commitAllowingStateLoss();
                         break;
                     case 2 :
-                        if(index != position){
-                            getFragmentManager().beginTransaction().replace(R.id.fl_container, other)
-                                    .commitAllowingStateLoss();
-                        }
+                        getFragmentManager().beginTransaction()
+                                .hide(contacts).hide(schedule).show(other)
+                                .commitAllowingStateLoss();
                         break;
                 }
                 index = position;
