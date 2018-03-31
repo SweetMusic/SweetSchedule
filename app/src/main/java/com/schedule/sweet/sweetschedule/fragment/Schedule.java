@@ -36,7 +36,6 @@ public class Schedule extends Fragment {
     private String mParam2;
 
     private  Button btn1;
-    private LinearLayout ll;
     Schedule_Day schedule_day;
 
     private OnFragmentInteractionListener mListener;
@@ -99,7 +98,8 @@ public class Schedule extends Fragment {
                 tv.setText(R.string.app_name);
                 tv.setBackgroundResource(R.drawable.textview_border);
                 LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT , LinearLayout.LayoutParams.WRAP_CONTENT );
-                lp.setMargins(0,(int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 100, getResources().getDisplayMetrics()),(int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 10, getResources().getDisplayMetrics()),0);
+                lp.setMargins(0,(int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 100, getResources().getDisplayMetrics()),0,0);
+                lp.setMarginStart((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 6, getResources().getDisplayMetrics()));
                 tv.setLayoutParams(lp);
                 tv.setWidth(100);
                 tv.setWidth((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 100, getResources().getDisplayMetrics()));

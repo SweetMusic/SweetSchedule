@@ -1,11 +1,19 @@
 package com.schedule.sweet.sweetschedule;
 
 import android.app.Fragment;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Debug;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.TypedValue;
+import android.view.Gravity;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.PopupWindow;
 
 import com.schedule.sweet.sweetschedule.fragment.Contacts;
 import com.schedule.sweet.sweetschedule.fragment.Other;
@@ -17,10 +25,11 @@ import com.ashokvarma.bottomnavigation.*;
 
 public class MainActivity extends AppCompatActivity implements Schedule.OnFragmentInteractionListener,Contacts.OnFragmentInteractionListener,Other.OnFragmentInteractionListener,Schedule_Day.OnFragmentInteractionListener{
 
-    BottomNavigationBar mBottomNavigationBar;
-    Schedule schedule;
-    Contacts contacts;
-    Other other;
+    private BottomNavigationBar mBottomNavigationBar;
+    private Schedule schedule;
+    private Contacts contacts;
+    private Other other;
+    private PopupWindow popup_schedule;
     int index = 0;
 
     @Override
@@ -80,6 +89,21 @@ public class MainActivity extends AppCompatActivity implements Schedule.OnFragme
             @Override
             public void onTabReselected(int position) {
                 //todo make a popupWindow
+                if (position == 0)
+                {
+                    //实例化popupWindow
+                    popup_schedule = new PopupWindow(getLayoutInflater().inflate(R.layout.popup_schedule, null)
+                            , (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 60, getResources().getDisplayMetrics())
+                            , (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 92, getResources().getDisplayMetrics()));
+                    popup_schedule.setOutsideTouchable(true);
+                    popup_schedule.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                    popup_schedule.setFocusable(true);
+                    Log.d("pop", (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP
+                            , popup_schedule.getContentView().getMeasuredHeight(), getResources().getDisplayMetrics())+"");
+                    popup_schedule.showAsDropDown(mBottomNavigationBar.getChildAt(0),0
+                            ,-(int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, popup_schedule.getContentView().getMeasuredHeight(), getResources().getDisplayMetrics())
+                                    -(int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, mBottomNavigationBar.getHeight(), getResources().getDisplayMetrics()), Gravity.CENTER);
+                }
             }
         });
         //TestFragment tf = new TestFragment();
