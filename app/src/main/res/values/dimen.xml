@@ -58,4 +58,5 @@
 
 
     <dimen name="popup_schedule_textSize">20sp</dimen>
+    <dimen name="dayLayout_item_width">30dp</dimen>
 </resources>

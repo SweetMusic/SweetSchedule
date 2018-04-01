@@ -155,7 +155,7 @@
             <HorizontalScrollView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
-                <LinearLayout
+                <com.schedule.sweet.sweetschedule.util.DayLinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:background="@color/colorLightBlue"
@@ -180,7 +180,7 @@
                         android:layout_marginStart="6dp"
                         android:background="@drawable/textview_border"
                         android:gravity="center"/>
-                </LinearLayout>
+                </com.schedule.sweet.sweetschedule.util.DayLinearLayout>
 
             </HorizontalScrollView>
         </LinearLayout>

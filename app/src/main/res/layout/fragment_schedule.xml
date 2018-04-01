@@ -19,6 +19,12 @@
             android:layout_height="40dp"
             android:layout_marginLeft="130dp"
             android:text="@string/app_name"/>
+        <Button
+            android:id="@+id/btn_2"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="30dp"
+            android:text="@string/app_name"/>
     </LinearLayout>
 
     <FrameLayout
