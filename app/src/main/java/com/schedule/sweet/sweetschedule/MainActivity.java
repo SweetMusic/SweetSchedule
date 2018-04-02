@@ -100,9 +100,10 @@ public class MainActivity extends AppCompatActivity implements Schedule.OnFragme
                     popup_schedule.setFocusable(true);
                     Log.d("pop", (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP
                             , popup_schedule.getContentView().getMeasuredHeight(), getResources().getDisplayMetrics())+"");
-                    popup_schedule.showAsDropDown(mBottomNavigationBar.getChildAt(0),0
+                    Log.d("count", "onTabReselected: " + mBottomNavigationBar.getChildCount());
+                    popup_schedule.showAsDropDown(mBottomNavigationBar,0
                             ,-(int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, popup_schedule.getContentView().getMeasuredHeight(), getResources().getDisplayMetrics())
-                                    -(int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, mBottomNavigationBar.getHeight(), getResources().getDisplayMetrics()), Gravity.CENTER);
+                                    -(int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, mBottomNavigationBar.getMeasuredHeight(), getResources().getDisplayMetrics()), Gravity.CENTER);
                 }
             }
         });

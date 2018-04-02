@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.util.TypedValue;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
 
@@ -20,6 +21,7 @@ public class DayLinearLayout extends LinearLayout {
 
     private int dayWidth;
     private int goI;
+    private int dayMarginStart;
 
     public DayLinearLayout(Context context) {
         super(context);
@@ -39,9 +41,11 @@ public class DayLinearLayout extends LinearLayout {
 
     @Override
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
+        Log.d("-----On-----", "onLayout: " + getChildCount());
         if(changed){
             for(int i = 0;i < getChildCount();i++)
             {
+                dayMarginStart = ((MarginLayoutParams) getChildAt(0).getLayoutParams()).getMarginStart();
                 Log.d("onLayout", "onLayout: "+i);
                 dayLayout(getChildAt(i),1);
             }
@@ -52,7 +56,7 @@ public class DayLinearLayout extends LinearLayout {
         boolean go = false;
         dayWidth = (int)TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 100
                 , getResources().getDisplayMetrics()) ;
-        if (getChildCount() != 0 && !getChildAt(0).equals(childView))
+        if (getChildCount() != 0 && !getChildAt(0).equals(childView) && getChildCount() != 1)
         {
             for(int i = 0;i < getChildCount();i++)
             {
@@ -61,10 +65,14 @@ public class DayLinearLayout extends LinearLayout {
                     Log.d("equals", "eqqqqq");
                     continue;
                 }
+                Log.d("marginStart", dayMarginStart+"");
                 Log.d("left", getChildAt(i).getLeft()+getChildAt(i).getMeasuredWidth()+"");
-                Log.d("width if", getChildAt(i).getLeft() - ((MarginLayoutParams) childView.getLayoutParams()).getMarginStart() * num + ":" + dayWidth * (num - 1));
+                Log.d("left2", (int)TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 100
+                        , getResources().getDisplayMetrics()) +"");
+                Log.d("width if", getChildAt(i).getLeft() - dayMarginStart * num + ":" + dayWidth * (num - 1));
                 //width check
-                if(getChildAt(i).getLeft() - ((MarginLayoutParams) childView.getLayoutParams()).getMarginStart() * num == dayWidth * (num - 1)){
+                if(getChildAt(i).getLeft() - dayMarginStart * num >= dayWidth * (num - 1) - 1
+                        && getChildAt(i).getLeft() - dayMarginStart * num <= dayWidth * (num - 1) + 1){
                     Log.d("cv.top", ((MarginLayoutParams) childView.getLayoutParams()).topMargin+"");
                     Log.d("cv.height", childView.getMeasuredHeight()+"");
                     Log.d("others.top",  ((MarginLayoutParams)getChildAt(i).getLayoutParams()).topMargin+"");
@@ -88,7 +96,7 @@ public class DayLinearLayout extends LinearLayout {
                         dayLayout(childView, ++num);
                         break;
                     }
-                    if(go){
+                    if(i != getChildCount()-1 && go){
                         dayLayout(childView, ++num);
                         break;
                     }
@@ -96,16 +104,16 @@ public class DayLinearLayout extends LinearLayout {
                 if(i == getChildCount()-1 && !go)
                 {
                     Log.d("3", "789");
-                    childView.layout(dayWidth * (num-1) + ((MarginLayoutParams) childView.getLayoutParams()).getMarginStart() * num
+                    childView.layout(dayWidth * (num-1) + dayMarginStart * num
                             ,((MarginLayoutParams) childView.getLayoutParams()).topMargin
-                            ,childView.getMeasuredWidth() + dayWidth * (num-1) +((MarginLayoutParams) childView.getLayoutParams()).getMarginStart() * num
+                            ,childView.getMeasuredWidth() + dayWidth * (num-1) +dayMarginStart * num
                             ,((MarginLayoutParams) childView.getLayoutParams()).topMargin + childView.getMeasuredHeight());
                     break;
                 }
                 if(i == getChildCount()-1 && go){
-                    childView.layout(getChildAt(goI).getMeasuredWidth() * (num-1) + ((MarginLayoutParams) childView.getLayoutParams()).getMarginStart() * num
+                    childView.layout(getChildAt(goI).getMeasuredWidth() * (num-1) + dayMarginStart * num
                             ,((MarginLayoutParams) childView.getLayoutParams()).topMargin
-                            ,getChildAt(goI).getMeasuredWidth() * (num-1) + childView.getMeasuredWidth() + ((MarginLayoutParams) childView.getLayoutParams()).getMarginStart() * num
+                            ,getChildAt(goI).getMeasuredWidth() * (num-1) + childView.getMeasuredWidth() + dayMarginStart * num
                             ,((MarginLayoutParams) childView.getLayoutParams()).topMargin + childView.getMeasuredHeight());
                     break;
                 }
@@ -114,9 +122,9 @@ public class DayLinearLayout extends LinearLayout {
         }
         else{
             Log.d("else","121321312312312");
-            childView.layout(((MarginLayoutParams) childView.getLayoutParams()).getMarginStart()
+            childView.layout(dayMarginStart
                     ,((MarginLayoutParams) childView.getLayoutParams()).topMargin
-                    ,childView.getMeasuredWidth() + ((MarginLayoutParams) childView.getLayoutParams()).getMarginStart()
+                    ,childView.getMeasuredWidth() + dayMarginStart
                     ,((MarginLayoutParams) childView.getLayoutParams()).topMargin + childView.getMeasuredHeight());
         }
 
