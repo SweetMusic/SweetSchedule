@@ -6,7 +6,7 @@
     android:background="@color/colorWhite">
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="30dp"
+        android:layout_height="40dp"
         android:text="@string/schedule_today"
         android:textColor="@color/colorBlue"
         android:textSize="@dimen/popup_schedule_textSize"
@@ -18,7 +18,7 @@
     </View>
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="30dp"
+        android:layout_height="40dp"
         android:text="@string/schedule_today"
         android:textColor="@color/colorBlue"
         android:textSize="@dimen/popup_schedule_textSize"
@@ -30,7 +30,7 @@
     </View>
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="30dp"
+        android:layout_height="40dp"
         android:text="@string/schedule_today"
         android:textColor="@color/colorBlue"
         android:textSize="@dimen/popup_schedule_textSize"

@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.os.Debug;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -92,18 +93,32 @@ public class MainActivity extends AppCompatActivity implements Schedule.OnFragme
                 if (position == 0)
                 {
                     //实例化popupWindow
-                    popup_schedule = new PopupWindow(getLayoutInflater().inflate(R.layout.popup_schedule, null)
-                            , (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 60, getResources().getDisplayMetrics())
-                            , (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 92, getResources().getDisplayMetrics()));
+                    View popupView = getLayoutInflater().inflate(R.layout.popup_schedule, null);
+                    popup_schedule = new PopupWindow(popupView
+                            , (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 96, getResources().getDisplayMetrics())
+                            , ViewGroup.LayoutParams.WRAP_CONTENT);
                     popup_schedule.setOutsideTouchable(true);
+                    //设置背景，不然点击取消无效
                     popup_schedule.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                     popup_schedule.setFocusable(true);
-                    Log.d("pop", (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP
-                            , popup_schedule.getContentView().getMeasuredHeight(), getResources().getDisplayMetrics())+"");
-                    Log.d("count", "onTabReselected: " + mBottomNavigationBar.getChildCount());
-                    popup_schedule.showAsDropDown(mBottomNavigationBar,0
-                            ,-(int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, popup_schedule.getContentView().getMeasuredHeight(), getResources().getDisplayMetrics())
-                                    -(int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, mBottomNavigationBar.getMeasuredHeight(), getResources().getDisplayMetrics()), Gravity.CENTER);
+                    popupView.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED);
+                    Log.d("pop", mBottomNavigationBar.getMeasuredHeight()+"");
+                    //获取mBottomNavigationBar在屏幕的高度，点在左下角
+                    int[] i = new int[2];
+                    mBottomNavigationBar.getLocationOnScreen(i);
+                    //获取屏幕高度
+                    DisplayMetrics dm = new DisplayMetrics();
+                    getWindowManager().getDefaultDisplay().getMetrics(dm);
+                    int screenHeight = dm.heightPixels;
+                    Log.d("i", "i[0]: "+i[0] + "    i[1]:"+i[1]+"        h:"+screenHeight);
+                    //设置popupW的位置，注意这里用的是bottom
+                    popup_schedule.showAtLocation(mBottomNavigationBar,Gravity.BOTTOM
+                            ,-(int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 120, getResources().getDisplayMetrics())
+                            ,screenHeight-i[1]+mBottomNavigationBar.getMeasuredHeight());
+//                    popup_schedule.showAsDropDown(mBottomNavigationBar
+//                            ,(i[0]+mBottomNavigationBar.getMeasuredWidth()/2)-popupView.getMeasuredWidth()/2
+//                            ,i[1]-popupView.getMeasuredHeight()-100
+//                            ,Gravity.NO_GRAVITY);
                 }
             }
         });
