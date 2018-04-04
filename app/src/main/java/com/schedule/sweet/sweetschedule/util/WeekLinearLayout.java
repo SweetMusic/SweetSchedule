@@ -1,39 +1,35 @@
 package com.schedule.sweet.sweetschedule.util;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.util.TypedValue;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
-
-import com.schedule.sweet.sweetschedule.R;
 
 /**
  * Created by sweet on 2018/4/1.
  *
  */
 
-public class DayLinearLayout extends LinearLayout {
+public class WeekLinearLayout extends LinearLayout {
 
     private int dayWidth, cvMarginStart, goI, cvMarginTop, cvHeight, cvWidth;
 
-    public DayLinearLayout(Context context) {
+    public WeekLinearLayout(Context context) {
         super(context);
     }
 
-    public DayLinearLayout(Context context, @Nullable AttributeSet attrs) {
+    public WeekLinearLayout(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public DayLinearLayout(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public WeekLinearLayout(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
 
-    public DayLinearLayout(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    public WeekLinearLayout(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
     }
 
