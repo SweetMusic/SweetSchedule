@@ -5,6 +5,7 @@
     android:orientation="vertical"
     android:background="@color/colorWhite">
     <TextView
+        android:id="@+id/popup_tv1"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:text="@string/schedule_today"
@@ -17,6 +18,7 @@
         android:background="@color/colorBlack">
     </View>
     <TextView
+        android:id="@+id/popup_tv2"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:text="@string/schedule_today"
@@ -29,6 +31,7 @@
         android:background="@color/colorBlack">
     </View>
     <TextView
+        android:id="@+id/popup_tv3"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:text="@string/schedule_today"

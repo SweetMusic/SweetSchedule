@@ -15,7 +15,7 @@ import android.widget.LinearLayout;
 
 public class WeekLinearLayout extends LinearLayout {
 
-    private int dayWidth, cvMarginStart, goI, cvMarginTop, cvHeight, cvWidth;
+    private int dayHeight, cvHeight, cvMarginStart, goI, cvMarginTop, cvWidth;
 
     public WeekLinearLayout(Context context) {
         super(context);
@@ -35,15 +35,18 @@ public class WeekLinearLayout extends LinearLayout {
 
     @Override
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
-        Log.d("-----On-----", "onLayout: " + getChildCount());
+        Log.d("-----On-----", "onLayout: " + getChildCount() + changed);
         if(changed){
             for(int i = 0;i < getChildCount();i++)
             {
-                cvMarginStart = ((MarginLayoutParams) getChildAt(0).getLayoutParams()).getMarginStart();
+                dayHeight = (int)TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 50
+                        , getResources().getDisplayMetrics()) ;
+                cvMarginStart = ((MarginLayoutParams) getChildAt(i).getLayoutParams()).getMarginStart();
                 cvMarginTop = ((MarginLayoutParams) getChildAt(i).getLayoutParams()).topMargin;
                 cvWidth = getChildAt(i).getMeasuredWidth();
                 cvHeight = getChildAt(i).getMeasuredHeight();
                 Log.d("onLayout", "onLayout: "+i);
+                Log.d("msg", "cvMarginTop: "+ cvMarginTop + "   cvMarginStart"+ cvMarginStart);
                 dayLayout(getChildAt(i),1);
             }
         }
@@ -51,8 +54,6 @@ public class WeekLinearLayout extends LinearLayout {
 
     private void dayLayout(View childView, int num){
         boolean go = false;
-        dayWidth = (int)TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 100
-                , getResources().getDisplayMetrics()) ;
         if (getChildCount() != 0 && !getChildAt(0).equals(childView) && getChildCount() != 1)
         {
             for(int i = 0;i < getChildCount();i++)
@@ -62,28 +63,20 @@ public class WeekLinearLayout extends LinearLayout {
                     Log.d("equals", "eqqqqq");
                     continue;
                 }
-                Log.d("marginStart", cvMarginStart+"");
-                Log.d("left", getChildAt(i).getLeft()+getChildAt(i).getMeasuredWidth()+"");
-                Log.d("left2", (int)TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 100
-                        , getResources().getDisplayMetrics()) +"");
-                Log.d("width if", getChildAt(i).getLeft() - cvMarginStart * num + ":" + dayWidth * (num - 1));
-                //width check
-                if(getChildAt(i).getLeft() - cvMarginStart * num >= dayWidth * (num - 1) - 1
-                        && getChildAt(i).getLeft() - cvMarginStart * num <= dayWidth * (num - 1) + 1){
-                    Log.d("cv.top", cvMarginTop+"");
-                    Log.d("cv.height", cvHeight+"");
-                    Log.d("others.top",  ((MarginLayoutParams)getChildAt(i).getLayoutParams()).topMargin+"");
-                    Log.d("others.height",  getChildAt(i).getMeasuredHeight()+"");
-                    //top check
-                    if((cvMarginTop + cvHeight <=
-                            ((MarginLayoutParams)getChildAt(i).getLayoutParams()).topMargin) ||
-                            (cvMarginTop >=
-                                    ((MarginLayoutParams)getChildAt(i).getLayoutParams()).topMargin +
-                                            getChildAt(i).getMeasuredHeight())){
-                        Log.d("2", cvMarginTop+"");
+                //top check
+                if(getChildAt(i).getTop() - cvMarginTop * num >= dayHeight * (num - 1) - 1
+                        && getChildAt(i).getTop() - cvMarginTop * num <= dayHeight * (num - 1) + 1){
+                    //width check
+                    Log.d("height", "hehhhehe");
+                    if((cvMarginStart + cvWidth <=
+                            ((MarginLayoutParams)getChildAt(i).getLayoutParams()).getMarginStart()) ||
+                            (cvMarginStart >=
+                                    ((MarginLayoutParams)getChildAt(i).getLayoutParams()).getMarginStart() +
+                                            getChildAt(i).getMeasuredWidth())){
+                        Log.d("2", cvMarginStart+"");
 //                        childView.layout(getChildAt(i).getMeasuredWidth() * (num-1) - (num-1) * ((MarginLayoutParams)getChildAt(i).getLayoutParams()).getMarginStart()
-//                                ,cvMarginTop,getChildAt(i).getMeasuredWidth() * (num-1) - (num-1) * ((MarginLayoutParams)getChildAt(i).getLayoutParams()).getMarginStart() + cvWidth
-//                                ,cvMarginTop + cvHeight);
+//                                ,cvMarginStart,getChildAt(i).getMeasuredWidth() * (num-1) - (num-1) * ((MarginLayoutParams)getChildAt(i).getLayoutParams()).getMarginStart() + cvWidth
+//                                ,cvMarginStart + cvHeight);
                         go = true;
                         goI = i;
                         continue;
@@ -101,17 +94,17 @@ public class WeekLinearLayout extends LinearLayout {
                 if(i == getChildCount()-1 && !go)
                 {
                     Log.d("3", "789");
-                    childView.layout(dayWidth * (num-1) + cvMarginStart * num
-                            ,cvMarginTop
-                            ,cvWidth + dayWidth * (num-1) +cvMarginStart * num
-                            ,cvMarginTop + cvHeight);
+                    childView.layout(cvMarginStart
+                            ,dayHeight * (num-1) + cvMarginTop * num
+                            ,cvWidth + cvMarginStart
+                            ,cvMarginTop * num + dayHeight * (num-1) + cvHeight );
                     break;
                 }
                 if(i == getChildCount()-1 && go){
-                    childView.layout(getChildAt(goI).getMeasuredWidth() * (num-1) + cvMarginStart * num
-                            ,cvMarginTop
-                            ,getChildAt(goI).getMeasuredWidth() * (num-1) + cvWidth + cvMarginStart * num
-                            ,cvMarginTop + cvHeight);
+                    childView.layout(cvMarginStart
+                            ,getChildAt(goI).getMeasuredHeight() * (num-1) + cvMarginTop * num
+                            ,cvMarginStart + cvWidth
+                            ,getChildAt(goI).getMeasuredHeight() * (num-1) + cvHeight + cvMarginTop * num);
                     break;
                 }
             }

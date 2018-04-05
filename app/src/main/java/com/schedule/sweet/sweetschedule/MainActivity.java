@@ -15,16 +15,18 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.PopupWindow;
+import android.widget.TextView;
 
 import com.schedule.sweet.sweetschedule.fragment.Contacts;
 import com.schedule.sweet.sweetschedule.fragment.Other;
 import com.schedule.sweet.sweetschedule.fragment.Schedule;
 import com.schedule.sweet.sweetschedule.fragment.Schedule_Day;
+import com.schedule.sweet.sweetschedule.fragment.Schedule_Week;
 import com.schedule.sweet.sweetschedule.fragment.TestFragment;
 import com.ashokvarma.bottomnavigation.*;
 
 
-public class MainActivity extends AppCompatActivity implements Schedule.OnFragmentInteractionListener,Contacts.OnFragmentInteractionListener,Other.OnFragmentInteractionListener,Schedule_Day.OnFragmentInteractionListener{
+public class MainActivity extends AppCompatActivity implements Schedule.OnFragmentInteractionListener,Contacts.OnFragmentInteractionListener,Other.OnFragmentInteractionListener,Schedule_Day.OnFragmentInteractionListener,Schedule_Week.OnFragmentInteractionListener{
 
     private BottomNavigationBar mBottomNavigationBar;
     private Schedule schedule;
@@ -119,6 +121,27 @@ public class MainActivity extends AppCompatActivity implements Schedule.OnFragme
 //                            ,(i[0]+mBottomNavigationBar.getMeasuredWidth()/2)-popupView.getMeasuredWidth()/2
 //                            ,i[1]-popupView.getMeasuredHeight()-100
 //                            ,Gravity.NO_GRAVITY);
+                    TextView tv1 = popupView.findViewById(R.id.popup_tv1);
+                    TextView tv2 = popupView.findViewById(R.id.popup_tv2);
+                    TextView tv3 = popupView.findViewById(R.id.popup_tv3);
+
+                    tv1.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            getFragmentManager().findFragmentByTag("schedule").getFragmentManager().beginTransaction().show(getFragmentManager().findFragmentByTag("schedule_Day"))
+                                    .hide(getFragmentManager().findFragmentByTag("schedule_Week")).commitAllowingStateLoss();
+                            popup_schedule.dismiss();
+                        }
+                    });
+
+                    tv2.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            getFragmentManager().findFragmentByTag("schedule").getFragmentManager().beginTransaction().hide(getFragmentManager().findFragmentByTag("schedule_Day"))
+                                    .show(getFragmentManager().findFragmentByTag("schedule_Week")).commitAllowingStateLoss();
+                            popup_schedule.dismiss();
+                        }
+                    });
                 }
             }
         });

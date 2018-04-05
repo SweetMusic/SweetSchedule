@@ -16,12 +16,12 @@ import com.schedule.sweet.sweetschedule.R;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link Schedule_Day.OnFragmentInteractionListener} interface
+ * {@link Schedule_Week.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link Schedule_Day#newInstance} factory method to
+ * Use the {@link Schedule_Week#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Schedule_Day extends Fragment {
+public class Schedule_Week extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -36,7 +36,7 @@ public class Schedule_Day extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    public Schedule_Day() {
+    public Schedule_Week() {
         // Required empty public constructor
     }
 
@@ -49,8 +49,8 @@ public class Schedule_Day extends Fragment {
      * @return A new instance of fragment Schedule.
      */
     // TODO: Rename and change types and number of parameters
-    public static Schedule_Day newInstance(String param1, String param2) {
-        Schedule_Day fragment = new Schedule_Day();
+    public static Schedule_Week newInstance(String param1, String param2) {
+        Schedule_Week fragment = new Schedule_Week();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -71,7 +71,7 @@ public class Schedule_Day extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_schedule_day, container, false);
+        return inflater.inflate(R.layout.fragment_schedule_week, container, false);
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -84,7 +84,7 @@ public class Schedule_Day extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        linearLayout = view.findViewById(R.id.linearLayout);
+        linearLayout = view.findViewById(R.id.monday);
     }
 
     public void addView(TextView tv)
