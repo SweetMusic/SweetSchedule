@@ -6,9 +6,11 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.schedule.sweet.sweetschedule.R;
@@ -33,6 +35,8 @@ public class Schedule_Week extends Fragment {
     private String mParam2;
 
     private LinearLayout linearLayout;
+    private ScrollView parentSV;
+    private ScrollView childSV;
 
     private OnFragmentInteractionListener mListener;
 
@@ -85,6 +89,23 @@ public class Schedule_Week extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         linearLayout = view.findViewById(R.id.monday);
+        parentSV = view.findViewById(R.id.week_parentSV);
+        childSV = view.findViewById(R.id.week_childSV);
+        parentSV.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                childSV.getParent().requestDisallowInterceptTouchEvent(true);
+                return false;
+            }
+        });
+        childSV.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                parentSV.getParent().requestDisallowInterceptTouchEvent(false);
+                return false;
+            }
+        });
+
     }
 
     public void addView(TextView tv)

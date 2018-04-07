@@ -10,11 +10,11 @@
         android:orientation="horizontal">
 
     </LinearLayout>
-    <!--<ScrollView-->
-        <!--android:focusableInTouchMode="false"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:background="@color/colorPurple">-->
+    <ScrollView
+        android:id="@+id/week_parentSV"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorPurple">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -25,65 +25,41 @@
                 android:background="@color/colorBlue">
 
             </LinearLayout>
-            <ScrollView
+            <HorizontalScrollView
                 android:focusableInTouchMode="false"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:orientation="vertical">
                     <ScrollView
+                        android:id="@+id/week_childSV"
                         android:layout_width="match_parent"
-                        android:layout_height="100dp"
-                        android:background="@color/colorOrange">
-                        <HorizontalScrollView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent">
-                            <com.schedule.sweet.sweetschedule.util.WeekLinearLayout
-                                android:id="@+id/monday"
-                                android:layout_width="1200dp"
-                                android:layout_height="1200dp">
+                        android:layout_height="100dp">
+                        <com.schedule.sweet.sweetschedule.util.WeekLinearLayout
+                            android:orientation="vertical"
+                            android:id="@+id/monday"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@color/colorOrange">
 
-                            </com.schedule.sweet.sweetschedule.util.WeekLinearLayout>
-                        </HorizontalScrollView>
+                        </com.schedule.sweet.sweetschedule.util.WeekLinearLayout>
                     </ScrollView>
-
-                    <HorizontalScrollView
+                    <ScrollView
                         android:layout_width="match_parent"
                         android:layout_height="100dp"
                         android:background="@color/colorPrimaryDark">
                         <com.schedule.sweet.sweetschedule.util.WeekLinearLayout
+                            android:id="@+id/tuesday"
                             android:layout_width="1200dp"
-                            android:layout_height="100dp">
+                            android:layout_height="1200dp">
 
                         </com.schedule.sweet.sweetschedule.util.WeekLinearLayout>
-                    </HorizontalScrollView>
-
-                    <HorizontalScrollView
-                        android:layout_width="match_parent"
-                        android:layout_height="100dp"
-                        android:background="@color/colorOrange">
-                        <com.schedule.sweet.sweetschedule.util.WeekLinearLayout
-                            android:layout_width="1200dp"
-                            android:layout_height="100dp">
-
-                        </com.schedule.sweet.sweetschedule.util.WeekLinearLayout>
-                    </HorizontalScrollView>
-
-                    <HorizontalScrollView
-                        android:layout_width="match_parent"
-                        android:layout_height="100dp"
-                        android:background="@color/colorPrimaryDark">
-                        <com.schedule.sweet.sweetschedule.util.WeekLinearLayout
-                            android:layout_width="1200dp"
-                            android:layout_height="100dp">
-
-                        </com.schedule.sweet.sweetschedule.util.WeekLinearLayout>
-                    </HorizontalScrollView>
+                    </ScrollView>
                 </LinearLayout>
-            </ScrollView>
+            </HorizontalScrollView>
         </LinearLayout>
-    <!--</ScrollView>-->
+    </ScrollView>
 
 </LinearLayout>
